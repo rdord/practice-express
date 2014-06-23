@@ -1,0 +1,44 @@
+extends layout
+include mixins
+
+block content
+	h1 Hello me!
+	h2= title
+
+	- var name = "Jan";
+	- var htmlName = "<small>Big John</small>";
+	- var fn = function(){ return "Hello, Express! "; };
+
+	ul#nav
+		li.current Jo!
+		li Ime mi je #{name}.
+		li My name is !{htmlName}.
+		li= fn()
+			a(href="/other", rel="nofollow") Go to other.
+
+
+	- var follwerCount = 3;
+
+	p
+		if follwerCount === 0
+			| You have zero followers.
+		else if follwerCount === 1
+			| You have one follower.
+		else
+			| You have #{follwerCount} followers.
+
+
+	- var users = [{name: "Andrej", email: "nadrej@gmail.com"}, {name: "Maja", email: "maja@gmail.com"}, {name: "Wada", email: "wadadad@gmail.com"}];
+
+	ul
+		each user, i in users
+			li #{i+1}: #{user.name} (#{user.email})
+
+	ul
+		each user in users
+			mixin userLi(user)
+
+	ul
+		each userObject in users
+			include user
+
